@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/gsubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/gcheckBox"
+        android:layout_alignTop="@+id/gcheckBox"
+        android:layout_marginTop="50dp"
+        android:text="SUBMIT" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/gid"
+        android:layout_alignBottom="@+id/gid"
+        android:layout_alignLeft="@+id/textView3"
+        android:text="ID NO"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/gamount"
+        android:layout_alignBottom="@+id/gamount"
+        android:layout_marginRight="15dp"
+        android:layout_toLeftOf="@+id/gamount"
+        android:text="AMOUNT"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/gdate"
+        android:layout_alignBottom="@+id/gdate"
+        android:layout_alignLeft="@+id/textView2"
+        android:text="DATE"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <CheckBox
+        android:id="@+id/gcheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/gamount"
+        android:layout_marginTop="51dp"
+        android:layout_toRightOf="@+id/textView1"
+        android:text="Check to Confirm the Amount" />
+
+    <EditText
+        android:id="@+id/gamount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/gdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gamount"
+        android:layout_alignParentRight="true"
+        android:ems="10"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/gid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/gdate"
+        android:layout_toRightOf="@+id/textView2"
+        android:ems="10"
+        android:inputType="number" />
+
+</RelativeLayout>
