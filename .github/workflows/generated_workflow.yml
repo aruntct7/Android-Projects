@@ -6,7 +6,7 @@ on:
 
 env:
   AWS_REGION: ap-south-1
-  ECS_CLUSTER: AppsForBharat-github-prod-cluster
+  ECS_CLUSTER: a4b-int-prod-cluster
 
 permissions:
   contents: read
@@ -29,7 +29,7 @@ jobs:
           aws-region: {{ env.AWS_REGION }}
     - name: Download server task definition
       run: |
-        aws ecs describe-task-definition --task-definition AppsForBharat-github-prod-mtest-server-task-def --query taskDefinition > server-task-definition.json
+        aws ecs describe-task-definition --task-definition a4b-int-prod-mtest-server-task-def --query taskDefinition > server-task-definition.json
 
     - name: Login to Amazon ECR
       id: login-server-ecr
@@ -41,22 +41,22 @@ jobs:
         ECR_REGISTRY: {{ steps.login-server-ecr.outputs.registry }}
         IMAGE_TAG: {{ github.sha }}
       run: |
-        docker build -t $ECR_REGISTRY/AppsForBharat-github_mtest_ecr:$IMAGE_TAG .
-        docker push $ECR_REGISTRY/AppsForBharat-github_mtest_ecr:$IMAGE_TAG
-        echo "image=$ECR_REGISTRY/AppsForBharat-github_mtest_ecr:$IMAGE_TAG" >> $GITHUB_OUTPUT
+        docker build -t $ECR_REGISTRY/a4b-int_mtest_ecr:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/a4b-int_mtest_ecr:$IMAGE_TAG
+        echo "image=$ECR_REGISTRY/a4b-int_mtest_ecr:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
     - name: Fill in the new image ID in the server task definition
       id: task-def-server
       uses: aws-actions/amazon-ecs-render-task-definition@v1
       with:
         task-definition: server-task-definition.json
-        container-name: AppsForBharat-github-prod-mtest-server-container 
+        container-name: a4b-int-prod-mtest-server-container 
         image: {{ steps.build-server-image.outputs.image }}
 
     - name: Deploy Amazon ECS server task definition
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: {{ steps.task-def-server.outputs.task-definition }}
-        service: AppsForBharat-github-prod-mtest-server-service
+        service: a4b-int-prod-mtest-server-service
         cluster: {{ env.ECS_CLUSTER }}
         wait-for-service-stability: true
