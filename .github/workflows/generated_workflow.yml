@@ -4,6 +4,17 @@ on:
   push:
     branches: [ "master" ]
 
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy"
+        required: true
+        default: "sbox"
+        type: choice
+        options:
+          - prod
+          - sbox
+
 env:
   AWS_REGION: ap-south-1
   ECS_CLUSTER: a4b-int-prod-cluster
@@ -14,6 +25,7 @@ permissions:
 jobs:
   deploy:
     name: Deploy
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'prod'
     runs-on: ubuntu-latest
     environment: production
 
